@@ -40,33 +40,54 @@
   </section>
 
   <!-- Header -->
-
-  <!-- Header -->
   <header id="mainHeader" class="bg-white/50 backdrop-blur sticky top-0 z-40 transition-all duration-300">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-      <!-- Logo -->
-      <div class="flex items-start gap-3">
-        <div class="w-10 h-10">
-          <img src="assets/icon/kulino-logo-blue.png" alt="Kulino Logo" class="w-full h-full object-contain" />
-        </div>
-        <div class="flex flex-col">
-          <h1 class="text-base sm:text-lg font-semibold leading-snug">
-            Kulino Game Hub — Prototype (Solana / Phantom)
-          </h1>
-          <p class="text-xs text-gray-500 mt-1">
-            Connect Phantom → pilih game → play → klaim reward
-          </p>
-        </div>
+  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+    <div class="flex items-start gap-3">
+      <div class="w-10 h-10">
+        <img src="assets/icon/kulino-logo-blue.png" alt="Kulino Logo" class="w-full h-full object-contain" />
       </div>
-
-      <!-- Desktop Menu -->
-      <div class="hidden sm:flex items-center gap-3">
-        <button id="connectBtn" class="px-4 py-2 bg-blue-600 text-white rounded-md shadow">
-          Connect Wallet
-        </button>
+      <div class="flex flex-col">
+        <h1 class="text-base sm:text-lg font-semibold leading-snug">
+          Kulino Game Hub — Prototype (Solana / Phantom)
+        </h1>
+        <p class="text-xs text-gray-500 mt-1">
+          Connect Phantom → pilih game → play → klaim reward
+        </p>
       </div>
     </div>
-  </header>
+
+    <div class="hidden sm:flex items-center gap-3">
+      <button id="connectBtn" class="px-4 py-2 bg-blue-600 text-white rounded-md shadow">
+        Connect Wallet
+      </button>
+    </div>
+
+    <button id="hamburgerBtn" class="sm:hidden flex items-center justify-center w-10 h-10 rounded-md bg-white shadow">
+      <svg id="iconMenu" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-700" fill="none"
+        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+
+      <svg id="iconClose" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-700 hidden" fill="none"
+        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <div
+    id="mobileMenu"
+    class="sm:hidden hidden bg-white border-t border-gray-200 overflow-hidden transition-all duration-300 ease-out opacity-0 max-h-0"
+  >
+    <div class="px-4 py-3 flex flex-col gap-3">
+      <button id="connectBtnMobile" class="w-full px-4 py-2 bg-blue-600 text-white rounded-md shadow">
+        Connect Wallet
+      </button>
+      <a href="#" class="text-gray-700 hover:text-blue-600 font-medium">Game</a>
+      <a href="#" class="text-gray-700 hover:text-blue-600 font-medium">Berita</a>
+    </div>
+  </div>
+</header>
 
   <main class="max-w-6xl mx-auto px-4 py-10">
   
@@ -150,40 +171,51 @@
         <!-- Slider wrapper -->
         <div id="gamesSlider" class="flex overflow-x-auto gap-6 scroll-smooth no-scrollbar">
           <!-- Game Card -->
-          <article
-            class="game-card relative bg-white rounded-2xl shadow-md min-w-[220px] sm:min-w-[240px] md:min-w-[300px] overflow-hidden fade-in">
-            <div class="relative">
-              <img src="assets/game-free-fire.jpg" alt="Game 1" class="w-full h-40 object-cover" />
-              <div class="overlay rounded-t-2xl"></div>
-            </div>
-            <div class="hidden sm:flex p-4 flex-col justify-between">
-              <div>
-                <h4 class="font-semibold text-lg">Simple Kulino — Demo</h4>
-                <p class="text-sm text-gray-500 mt-1">
-                  Game sederhana: tap untuk menang, dapat reward.
-                </p>
-              </div>
-              <div class="flex gap-2 mt-4">
-                <button
-                  class="flex-1 px-3 py-2 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700 transition-colors">
-                  Play
-                </button>
-                <button
-                  class="flex-1 px-3 py-2 bg-white border border-gray-200 rounded-md text-sm hover:bg-gray-50 transition-colors">
-                  Preview
-                </button>
-              </div>
-            </div>
-          </article>
+          <article 
+  class="game-card relative bg-white rounded-2xl shadow-md min-w-[220px] sm:min-w-[240px] md:min-w-[300px] overflow-hidden fade-in cursor-pointer"
+  onclick="toggleGameCard(this)">
+  <div class="relative">
+    <img src="assets/game-free-fire.jpg" alt="Game 1" class="w-full h-40 object-cover" />
+    <div class="overlay rounded-t-2xl"></div>
+  </div>
+
+  <div class="hidden sm:flex p-4 flex-col justify-between game-card-content">
+    <div>
+      <h4 class="font-semibold text-lg">Simple Kulino — Demo</h4>
+      <p class="text-sm text-gray-500 mt-1">
+        Game sederhana: tap untuk menang, dapat reward.
+      </p>
+    </div>
+
+    <div class="flex gap-2 mt-4">
+      <button class="flex-1 px-3 py-2 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700 transition-colors">
+        Play
+      </button>
+      <button class="flex-1 px-3 py-2 bg-white border border-gray-200 rounded-md text-sm hover:bg-gray-50 transition-colors">
+        Preview
+      </button>
+    </div>
+  </div>
+
+  <div class="absolute inset-0 bg-black/50 flex-col items-center justify-center hidden game-card-mobile-btn">
+    <button class="mb-2 px-4 py-2 bg-indigo-600 text-white rounded-lg shadow">
+      Play
+    </button>
+    <button class="px-4 py-2 bg-white text-gray-800 rounded-lg shadow">
+      Preview
+    </button>
+  </div>
+</article>
 
           <!-- Duplikat card lain ... -->
           <article
-            class="game-card relative bg-white rounded-2xl shadow-md min-w-[280px] md:min-w-[320px] overflow-hidden fade-in">
+            class="game-card relative bg-white rounded-2xl shadow-md min-w-[220px] sm:min-w-[240px] md:min-w-[300px] overflow-hidden fade-in cursor-pointer"
+  onclick="toggleGameCard(this)">
             <div class="relative">
               <img src="assets/mobile-legends.jpg" alt="Game 1" class="w-full h-40 object-cover" />
               <div class="overlay rounded-t-2xl"></div>
             </div>
-            <div class="hidden sm:flex p-4 flex-col justify-between">
+            <div class="hidden sm:flex p-4 flex-col justify-between game-card-content">
               <div>
                 <h4 class="font-semibold text-lg">Simple Kulino — Demo</h4>
                 <p class="text-sm text-gray-500 mt-1">
@@ -201,6 +233,14 @@
                 </button>
               </div>
             </div>
+            <div class="absolute inset-0 bg-black/50 flex-col items-center justify-center hidden game-card-mobile-btn">
+    <button class="mb-2 px-4 py-2 bg-indigo-600 text-white rounded-lg shadow">
+      Play
+    </button>
+    <button class="px-4 py-2 bg-white text-gray-800 rounded-lg shadow">
+      Preview
+    </button>
+  </div>
           </article>
 
           <!-- Card 3 -->
@@ -305,6 +345,74 @@
   </main>
 
   <?php include("./includes/footer.php"); ?>
+
+  <script>
+  const hamburgerBtn = document.getElementById("hamburgerBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const iconMenu = document.getElementById("iconMenu");
+  const iconClose = document.getElementById("iconClose");
+
+  hamburgerBtn.addEventListener("click", () => {
+    const isOpen = !mobileMenu.classList.contains("hidden");
+
+    if (isOpen) {
+      mobileMenu.classList.add("opacity-0");
+      mobileMenu.classList.remove("max-h-96");
+      setTimeout(() => {
+        mobileMenu.classList.add("hidden");
+      }, 200);
+    } else {
+      mobileMenu.classList.remove("hidden");
+      setTimeout(() => {
+        mobileMenu.classList.remove("opacity-0");
+        mobileMenu.classList.add("max-h-96");
+      }, 10);
+    }
+
+    iconMenu.classList.toggle("hidden");
+    iconClose.classList.toggle("hidden");
+  });
+
+  function toggleGameCard(card) {
+    if (window.innerWidth >= 640) return;
+
+    const btnLayer = card.querySelector('.game-card-mobile-btn');
+
+    document.querySelectorAll('.game-card-mobile-btn').forEach(el => {
+      if (el !== btnLayer) {
+        el.classList.add('hidden');
+        el.classList.remove('flex', 'animate-fadeIn');
+      }
+    });
+
+    btnLayer.classList.toggle('hidden');
+    btnLayer.classList.toggle('flex');
+    btnLayer.classList.toggle('animate-fadeIn');
+  }
+
+  document.addEventListener('click', function(e) {
+    if (window.innerWidth >= 640) return;
+    const card = e.target.closest('.game-card');
+    if (!card) {
+      document.querySelectorAll('.game-card-mobile-btn').forEach(el => {
+        el.classList.add('hidden');
+        el.classList.remove('flex', 'animate-fadeIn');
+      });
+    }
+  });
+
+  const style = document.createElement("style");
+  style.textContent = `
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.25s ease-out;
+    }
+  `;
+  document.head.appendChild(style);
+</script>
 
   <script src="./js/script-index.js"></script>
   </body>
